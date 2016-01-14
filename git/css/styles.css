@@ -1,0 +1,30 @@
+ /* Global */
+
+body {
+    background-color: white; 
+}
+
+#wrapper {
+    width: 1000px;
+    margin: 0 auto; 
+}
+
+ /* content */
+
+#content {
+    text-align: center;
+}
+
+ /* Text styles */
+
+p {
+    color: #003286;
+}
+
+h1 {
+    color: #D61502; 
+}
+
+h2 {
+    color: #510602;
+}
