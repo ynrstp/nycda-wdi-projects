@@ -1,0 +1,15 @@
+html
+	head
+	body
+		h2 Search for users
+		form(action='/results' method='post')
+			label enter name below
+			br
+			input(type="text" name="userName" placeholder="Type here")
+			br
+			br
+			input(type='submit' value='search')
+
+		a(href='/users') Back to list
+		br
+		a(href='adduser') Add a user

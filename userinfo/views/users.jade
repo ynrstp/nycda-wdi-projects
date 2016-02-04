@@ -1,0 +1,11 @@
+html
+	head
+	body
+		
+		h2 This is a list of users
+		each val in stuff
+			p= val.firstname + ' ' + val.lastname
+		br
+		a(href='adduser') Add a user
+		br
+		a(href='search') Search for a user
