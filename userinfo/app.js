@@ -106,13 +106,26 @@ app.post('/add', function(req, res){
 
 	function addUser(p1) {
 
-	  	var original = fs.readFileSync('./users.json');
-	  	var parsed = JSON.parse(original);
+	  	fs.readFile('./users.json', function (err, data) {
 
-	  	parsed.push(p1);
+			if (err) {
+				throw err;
+			}
 
-	  	var reformat = JSON.stringify(parsed);
-	  	fs.writeFileSync('./users.json', reformat);
+			var original = JSON.parse(data)
+
+		  	original.push(p1);
+
+		  	var reformat = JSON.stringify(original);
+
+		  	fs.writeFile('./users.json', reformat, function(err) {
+
+				if(err) {
+				throw err;
+				}
+		
+			});
+		});
 	}
 
 	addUser({
@@ -128,7 +141,5 @@ app.post('/add', function(req, res){
 
 var server = app.listen(3000, function () {
 	console.log('Example app listening on port: ' + server.address().port);
-
-
 
 });
