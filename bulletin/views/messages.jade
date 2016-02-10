@@ -1,0 +1,14 @@
+doctype html
+html
+	head
+		link(rel='stylesheet', href='/css/styles.css')
+	body
+		a(href='add') Add a message
+		br
+		h2 Below are all posted messages
+
+		ul
+			each val in data
+				li
+					H2= val.title
+					p= val.body

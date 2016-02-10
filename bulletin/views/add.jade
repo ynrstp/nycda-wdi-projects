@@ -1,0 +1,17 @@
+doctype html
+html
+	head
+	body
+		a(href='/messages') Back to messages
+		br
+		h2 Add new message
+		form(action='/adding' method='post')
+			label enter title 
+			br
+			input(type="text" name="messageTitle" placeholder="Type here")
+			br
+			label enter message
+			br
+			input(type="text" name="message" placeholder="Type here")
+			br
+			input(type='submit' value='post')
