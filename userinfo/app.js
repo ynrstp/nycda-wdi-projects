@@ -4,7 +4,8 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 app.set('views', './views');
 app.set('view engine', 'jade');
@@ -21,7 +22,18 @@ app.get('/users', function (req, res) {
 app.get('/search', function (req, res) {
 
 	delete require.cache[require.resolve('./users.json')]
-	res.render('search');
+
+	fs.readFile('./users.json', function (err, data) {
+
+		if (err) {
+			throw err;
+		}
+
+		var text = JSON.parse(data)
+
+		res.render('search', {stuff: text});
+	})
+	
 
 });
 
@@ -137,6 +149,39 @@ app.post('/add', function(req, res){
 	delete require.cache[require.resolve('./users.json')]
   	res.redirect('/users');
 
+});
+
+
+//route 6: Modify your form so that every time the user enters a key, 
+//it makes an AJAX call that populates the search results.
+
+app.get('/searching', function(req, res){
+
+	var searchterm = req.query.baby;
+
+	var results = []
+
+ 	fs.readFile('./users.json', function (err, data) {
+
+		if (err) {
+			throw err;
+		}
+
+		var original = JSON.parse(data)
+
+		for(var i = 0; i < original.length; i++){
+
+			if(original[i].firstname.substr(0, searchterm.length) == searchterm || original[i].lastname.substr(0, searchterm.length) == searchterm){
+
+				results.push(original[i].firstname + ' ' + original[i].lastname + '<br>')
+			}
+
+		}
+
+		res.send(results);	
+	
+	})
+ 	
 });
 
 var server = app.listen(3000, function () {
