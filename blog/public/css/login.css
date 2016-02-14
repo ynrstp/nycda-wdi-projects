@@ -1,0 +1,151 @@
+body{
+
+	margin-top: 0;
+	background-color: #131426;
+	font-family: 'Oswald';
+	font-weight: 300;
+
+}
+
+h1{
+
+	color: white;
+}
+
+#wrapper{
+
+	width: 96%;
+	margin: 0 auto;
+	height: 700px;
+	text-align: center;
+	z-index: -1;
+}
+
+.loginblock{
+	color: white;
+	display: inline-block;
+	width: calc(30% - 20px);
+	height: 600px;
+	vertical-align: middle;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: left;
+	background-color: #3078C0;
+	box-shadow: 0px 0px 10px 1px black;
+
+}
+
+#madeby{
+
+	background-color: #B31C29;
+	margin: 0 10px;
+	text-align: center;
+
+}
+
+#register{
+
+	background-color: white;
+	color: #182045;
+
+}
+
+#message{
+	color: #B31C29;
+	margin-top: 40px;
+
+}
+	
+nav a{
+
+
+}
+
+nav p{
+
+	color: #3078C0;
+}
+
+input {
+    
+    width: 240px;
+    height: 35px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: black;
+    padding-left: 5px;
+    color: #468EEC;
+    font-size: 15px;
+    font-family: 'Oswald';
+    
+}
+
+#button {
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: black; 
+    padding: 1px 20px;
+    height: 40px;
+    width: 100px;
+    background-color: white;
+    color: #468EEC;
+    font-size: 15px;
+    border-radius: 5px;
+    font-family: 'Oswald';
+
+    
+}
+
+#button:hover {
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: black; 
+    padding: 1px 20px;
+    height: 40px;
+    width: 100px;
+    background-color: white;
+    color: #468EEC;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 0px 20px -2px black;
+    font-family: 'Oswald';
+}
+
+#button2 {
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: black; 
+    padding: 1px 20px;
+    height: 40px;
+    width: 100px;
+    background-color: #B31C29;
+    color: white;
+    font-size: 15px;
+    border-radius: 5px;
+    font-family: 'Oswald';
+
+    
+}
+
+#button2:hover {
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: black; 
+    padding: 1px 20px;
+    height: 40px;
+    width: 100px;
+    background-color: #B31C29;
+    color: white;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 0px 20px -2px black;
+    font-family: 'Oswald';
+}

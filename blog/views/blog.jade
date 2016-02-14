@@ -1,0 +1,37 @@
+doctype html
+html
+	head
+		link(rel='stylesheet', href='/css/blog.css')
+		link(href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+		script(src='/js/blog.js')
+	body
+		
+		div(id="wrapper")
+			nav
+				h1=welcome
+			div(id="allposts" class="blogblock")
+				h2 All posts
+				div(id="allpostslist")
+			div(id="middle" class="blogblock")
+				div(id="myposts")
+					h2 My posts
+					div(id="mypostslist")
+
+				div(id="search")
+					h2 
+			div(id="viewpost" class="blogblock")
+				h2 Create a post
+				form(action='/addpost' method='post')
+					label enter title 
+					br
+					input(type="text" name="postTitle" placeholder="Type here")
+					br
+					br
+					label enter content
+					br
+					textarea(type="text" name="content" placeholder="Type here")
+					br
+					input(id="button" type='submit' value='post')
+			div(id="link")
+				a(href='/logout' id='logout') Logout
