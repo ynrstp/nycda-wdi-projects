@@ -7,7 +7,7 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
-var connectionString = "postgres://yoni:123@localhost:5433/yoni";
+var connectionString = process.argv[2]
 
 app.set('views', './views');
 app.set('view engine', 'jade');
