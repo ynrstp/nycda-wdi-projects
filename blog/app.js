@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({secret:'easy', resave: false, saveUninitialized: true}))
 app.use(express.static('public'));
 
-var sequelize = new Sequelize('postgres://yoni:123@localhost:5433/yoni');
+var sequelize = new Sequelize(process.argv[2]);
 
 var blogusers = sequelize.define('blogusers', {
 
@@ -365,18 +365,10 @@ app.get('/loadcomments', function(req, res){
 	
 });
 
-blogusers.sync().then(function () {
+sequelize.sync().then(function () {
 
-	blogposts.sync().then(function () {
-
-		blogcomments.sync().then(function () {
-
-			var server = app.listen(3000, function () {
-				console.log('Example app listening on port: ' + server.address().port);
-
-			});
-
-		});
+	var server = app.listen(3000, function () {
+		console.log('Example app listening on port: ' + server.address().port);
 
 	});
 
