@@ -1,0 +1,40 @@
+/*general styling*/
+
+body {
+    
+    margin: 0;
+}
+
+#contentwrapper {
+    
+    height: 700px;
+    background-color: #2A94D6;
+    padding-top: 100px;
+}
+
+/* navigation styling */
+
+nav {
+    
+    height: 100px;
+    background-color: #344A5F;
+    text-align: center;
+    padding-top: 30px;
+}
+
+nav a {
+    
+    text-decoration: none;
+    font-family: 'Impact';
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+}
+
+/* Footer styling */
+
+footer {
+    
+    height: 150px;
+    background-color: #344A5F;
+}
