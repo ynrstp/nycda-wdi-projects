@@ -3,6 +3,9 @@ var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
 var session = require('express-session')
 
+var fs = require('fs');
+var bcrypt = require('bcrypt');
+
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -147,9 +150,15 @@ app.post('/registering', function (req, res) {
 
 	if(newUsername !== "" && newPassword !== ""){
 
-		blogusers.create({
-		    username: newUsername,
-		    password: newPassword
+		bcrypt.hash(newPassword, 8, function(err, hash) {
+  			if (err !== undefined) {
+    			console.log(err);
+  			} else {
+   				 blogusers.create({
+		    		username: newUsername,
+		    		password: hash
+				});
+  			}
 		});
 
 		console.log(newUsername + " " + newPassword)
@@ -363,6 +372,15 @@ app.get('/loadcomments', function(req, res){
 			})
 	}
 	
+});
+
+  bcrypt.compare(process.argv[2], data.toString(), function(err, result) {
+    if (err !== undefined) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+  });
 });
 
 sequelize.sync().then(function () {
