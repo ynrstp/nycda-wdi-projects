@@ -2,17 +2,34 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
 var session = require('express-session')
+var sassMiddleware = require('node-sass-middleware');
 
 var fs = require('fs');
 var bcrypt = require('bcrypt');
 
 var app = express();
 
+app.set('views', './views');
+app.set('view engine', 'jade');
+
+app.use('/css', sassMiddleware({
+	src: __dirname + '/sass',
+	dest: __dirname + '/public/css',
+	debug: true,
+	outputStyle: 'expanded'
+}));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({secret:'easy', resave: false, saveUninitialized: true}))
 app.use(express.static('public'));
 
-var sequelize = new Sequelize(process.argv[2]);
+var sequelize = new Sequelize('postgres', process.env.PSQL_USERNAME, process.env.PSQL_PASSWORD, {
+    host: 'localhost',
+    dialect: 'postgres',
+    define: {
+        timestamps: false
+    }
+});
 
 var blogusers = sequelize.define('blogusers', {
 
@@ -87,18 +104,15 @@ var blogcomments = sequelize.define('blogcomments', {
   freezeTableName: true
 });
 
-app.set('views', './views');
-app.set('view engine', 'jade');
-
 //route 1: renders a page that displays login/register screen.
-app.get('/blog/login', function (req, res) {
+app.get('/', function (req, res) {
 
 	res.render('login', {message: ""})
 
 })
 
-//Will login the user
-app.post('/loggingin', function (req, res) {
+//Will login the username
+app.post('/login', function (req, res) {
 
 	var userName = req.body.username;
 	var passWord = req.body.password;
@@ -114,17 +128,25 @@ app.post('/loggingin', function (req, res) {
 
 				if(data.length > 0){
 					
-					if(data[0].password == passWord){
-						req.session.loggedIn = true;
-						req.session.userid = data[0].uid
-						req.session.user = data[0].username
-						res.redirect('/blog');
-					}
+					bcrypt.compare(passWord, data[0].password, function(err, result) {
+					    if (err !== undefined) {
+					      console.log(err);
+					    } 
 
-					else{
+	    				if(result){
 
-						res.render('login', {message: "Wrong password"});;
-					}
+					    	req.session.loggedIn = true;
+							req.session.userid = data[0].uid
+							req.session.user = data[0].username
+							res.redirect('/blog');
+
+						}
+
+						else{
+
+						   res.render('login', {message: "Wrong password"});;
+						}
+  					});
 				}
 
 				else{
@@ -142,8 +164,15 @@ app.post('/loggingin', function (req, res) {
 
 })	
 
+app.get('/logout', function (req, res) {
+
+	req.session.loggedIn = false;
+	res.render('login')
+
+})	
+
 //Will register a new user and redirect to login page
-app.post('/registering', function (req, res) {
+app.post('/adduser', function (req, res) {
 
 	var newUsername = req.body.newUsername;
 	var newPassword = req.body.newPassword;
@@ -192,13 +221,6 @@ app.get('/blog', function (req, res) {
 
 })
 
-app.get('/logout', function (req, res) {
-
-	req.session.loggedIn = false;
-	res.render('login')
-
-})	
-
 //Will add new post to the posts table
 
 app.get('/loadmyposts', function(req, res){
@@ -220,7 +242,7 @@ app.get('/loadmyposts', function(req, res){
 
 				for(i = 0; i < times; i++){
 
-					results.push("<a href='/blog/post/" + data[i].dataValues.title + "'>" + data[i].dataValues.title + "<a/>" + "<br>")
+					results.push("<a href='/post/" + data[i].dataValues.title + "'>" + data[i].dataValues.title + "<a/>" + "<br>")
 
 				}
 
@@ -247,7 +269,7 @@ app.get('/loadallposts', function(req, res){
 
 				for(i = 0; i < times; i++){
 
-					results.push("<a href='/blog/post/" + data[i].dataValues.title + "'>" + data[i].dataValues.title + "<a/>" + " by " + data[i].dataValues.author + "<br>")
+					results.push("<a href='/post/" + data[i].dataValues.title + "'>" + data[i].dataValues.title + "<a/>" + " by " + data[i].dataValues.author + "<br>")
 
 				}
 
@@ -257,7 +279,7 @@ app.get('/loadallposts', function(req, res){
 	
 });
 
-app.post('/addpost', function (req,res){
+app.post('/post', function (req,res){
 
 	var postTitle = req.body.postTitle;
 	var postContent = req.body.content;
@@ -290,7 +312,7 @@ app.post('/addpost', function (req,res){
 
 var postShow = 
 
-app.get('/blog/post/:posttitle', function (req, res) {
+app.get('/post/:posttitle', function (req, res) {
 
 	if(req.session.loggedIn == true){
 
@@ -319,7 +341,7 @@ app.get('/blog/post/:posttitle', function (req, res) {
 
 });
 
-app.post('/addcomment', function (req, res) {
+app.post('/comment', function (req, res) {
 
 	var comment = req.body.comment;
 	var timeSet = new Date();
@@ -372,15 +394,6 @@ app.get('/loadcomments', function(req, res){
 			})
 	}
 	
-});
-
-  bcrypt.compare(process.argv[2], data.toString(), function(err, result) {
-    if (err !== undefined) {
-      console.log(err);
-    } else {
-      console.log(result);
-    }
-  });
 });
 
 sequelize.sync().then(function () {
