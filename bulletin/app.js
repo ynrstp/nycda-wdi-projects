@@ -7,7 +7,8 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
-var connectionString = process.argv[2]
+
+var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
 
 app.set('views', './views');
 app.set('view engine', 'jade');
@@ -26,37 +27,22 @@ app.get('/messages', function (req, res) {
 
 			for(var i = 0; i < result.rows.length; i++){
 
-				titles.push(result.rows[i].title)
-				bodies.push(result.rows[i].body)
+				var nextMessage = {}
+
+				nextMessage.title = result.rows[i].title
+				nextMessage.body = result.rows[i].body
+
+				messages.push(nextMessage)
 
 			}
 
 			done();
 			pg.end();
 
-			createMessages()
+			res.render('messages', {data: messages});
 		});
 
 	});
-
-	function createMessages(){
-
-		for(i = 0; i < titles.length; i++){
-
-			var nextMessage = {}
-
-			nextMessage.title = titles[i]
-			nextMessage.body = bodies[i]
-			messages.push(nextMessage)
-
-		}
-
-		res.render('messages', {data: messages});
-
-		titles = []
-		bodies = []
-
-	}
 
 });
 
