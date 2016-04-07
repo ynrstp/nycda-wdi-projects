@@ -1,0 +1,66 @@
+doctype html
+html
+	head
+		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
+		link(rel='stylesheet', href='/styles/index.css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+		script(src='/scripts/index.js')
+		link(href="styles/prism.css" rel="stylesheet")
+		script(src="scripts/prism.js")
+	body
+		
+		div.container-fluid
+			div.row
+				div.col-md-12
+					h1 FizzBuzz
+
+
+			div.row
+				div.col-md-1
+					each type in menu
+						ul.list-group
+							h5=type.title
+							each topic in type.topics
+								li.list-group-item
+									p=topic
+					a(href='/add') Add
+				div.col-md-10#content
+					div.row
+						div.col-md-6#codeblock
+							h4 Code
+							pre 
+								code(class="language-javascript").
+
+									var numbers = []
+
+									for(var i = 0; i < 101; i++){
+
+										numbers.push(i);
+
+										if(numbers[i] % 3 === 0 && numbers[i] % 5 === 0) {
+											numbers[i] = "FizzBuzz"
+										}
+
+										if(numbers[i] % 5 === 0) {
+											numbers[i] = "Buzz"
+										}
+
+										if(numbers[i] % 3 === 0) {
+											numbers[i] = "Fizz"
+										}
+									}
+
+									numbers.shift()
+									console.log(numbers) 
+
+						div#assignment.col-md-6
+							h4 Assignment
+							p Write a program that prints the numbers from 1 to 100. But for multiples of 3 print Fizz instead of the number and for the multiples of 5 print Buzz. For numbers which are multiples of both 3 and 5 print FizzBuzz. Your output should look like the following:1 2 fizz 4 buzz fizz 7 8 fizz buzz 11 fizz 13 14 fizzbuzz 16 17 fizz 19 buzz … 100.
+							br
+							h4 Questions
+							form(action='/addtype' method='post')
+								br
+								input(type="text" name="type" placeholder="Enter question" class='form-control')
+								input(id='button' type='submit' value='add')
+						
+
