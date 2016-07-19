@@ -1,0 +1,37 @@
+doctype html
+html
+	head
+		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
+		link(rel='stylesheet', href='/styles/index.css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+		script(src='/scripts/add.js')
+	body
+		
+		div.container
+			div.row
+				div.col-md-12
+					h1 nav-bar
+
+			div.row
+				div.col-md-12
+					h1 content requests
+
+			div.row
+				div.col-md-6
+					h3 Add type
+					form(action='/addtype' method='post')
+						label Type name
+						br
+						input(type="text" name="type" placeholder="Type here")
+						input(id='button' type='submit' value='add')
+				div.col-md-6
+					h3 Add topic
+					form(action='/addtopic' method='post')
+						label Topic name
+						br
+						input(type="text" name="topic" placeholder="Type here")
+						br
+						select(name='type' class= 'form-control')
+							each type in types
+								option(value=type.typeUid)=type.type
+						input(id='button' type='submit' value='add')
