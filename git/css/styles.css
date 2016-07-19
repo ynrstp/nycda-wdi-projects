@@ -1,0 +1,53 @@
+ /* Global */
+
+body {
+    background-color: white; 
+}
+
+#wrapper {
+    width: 1000px;
+    margin: 0 auto; 
+}
+
+ /* content */
+
+#content {
+    text-align: center;
+}
+
+ /* Text styles */
+
+p {
+    color: #003286;
+}
+
+h1 {
+    color: #D61502; 
+}
+
+h2 {
+    color: #510602;
+}
+
+ /* navigation */
+
+nav {
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+nav a {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    margin: 0 10px 0;
+    text-decoration: none;
+    color: white;
+    background-color: #003286;
+}
+
+ /* footer */
+
+footer p {
+    
+    color: black;
+}
