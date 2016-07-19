@@ -1,0 +1,45 @@
+doctype html
+html
+	head
+		link(rel='stylesheet', href='/css/login.css')
+		link(href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+		script(src='/js/login.js')
+
+	body
+		
+		div(id="wrapper")
+			nav
+				h1 Welcome
+			div(id="login" class="loginblock")
+				h2 Login 
+				form(action='/login' method='post')
+					label username 
+					br
+					input(id="userfield" type="text" name="username" placeholder="Type here")
+					br
+					br
+					label password 
+					br
+					input(id="passfield" type="password" name="password" placeholder="Type here")
+					br
+					br
+					input(id="button" type='submit' value='Login')
+			div(id="madeby" class="loginblock")
+				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel leo auctor nunc lacinia iaculis. Sed nunc tortor, malesuada ac erat tincidunt, sodales finibus nisl. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer malesuada sem eget arcu sodales, a viverra quam varius. In quis commodo ex, sed facilisis lacus. Donec tortor magna, rutrum ut lacinia non, venenatis vel est. Donec nec ultrices nibh.
+			div(id="register" class="loginblock")
+				h2 Register 
+				form(action='/adduser' method='post')
+					label enter username 
+					br
+					input(type="text" name="newUsername" placeholder="Type here")
+					br
+					br
+					label enter password (NOT ENCRYPTED)
+					br
+					input(type="password" name="newPassword" placeholder="Type here")
+					br
+					br
+					input(id="button2" type='submit' value='Register')
+			div(id="message")
+				p= message
