@@ -1,0 +1,21 @@
+doctype html
+html
+	head
+		link(rel='stylesheet', href='/css/styles.css')
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+		script(src='/js/autocomplete.js')
+	body
+		h2 Search for users
+		form(action='/results' method='post')
+			label enter name below
+			br
+			input(id='searchbox' type="text" name="userName" placeholder="Type here")
+			div(id='autocomplete')
+				p(id="result") Start typing
+			br
+			br
+			input(type='submit' value='search')
+
+		a(href='/users') Back to list
+		br
+		a(href='/adduser') Add a user

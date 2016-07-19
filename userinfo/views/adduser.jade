@@ -1,0 +1,23 @@
+html
+	head
+	body
+		h2 Add new user
+		form(action='/add' method='post')
+			label enter first name 
+			br
+			input(type="text" name="firstName" placeholder="Type here")
+			br
+			label enter last name 
+			br
+			input(type="text" name="lastName" placeholder="Type here")
+			br
+			label enter email address 
+			br
+			input(type="text" name="email" placeholder="Type here")
+			br
+			br
+			input(type='submit' value='add')
+
+		a(href='/users') Back to list
+		br
+		a(href='/search') Search for a user
