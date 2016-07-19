@@ -1,0 +1,39 @@
+h1 {
+  color: purple;
+}
+
+body {
+  text-align: left;
+}
+
+ul {
+  text-align: left;
+}
+
+li {
+  text-align: center;
+  cursor: pointer;
+  font-size: 90%;
+}
+
+#content {
+  border: solid 1px #ddd;
+}
+
+#assignment {
+  text-align: left;
+}
+
+#codeblock {
+  text-align: left;
+}
+
+#lorem{
+
+	text-align: left;
+}
+
+h1{
+
+	text-align: center;
+}
